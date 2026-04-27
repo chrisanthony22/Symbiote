@@ -474,7 +474,7 @@ function jsActivate(touch){
   const tx = touch.clientX - wr.left;
   const ty = touch.clientY - wr.top;
   // Accept touches in the LEFT 55% of the canvas
-  if(tx > _W * 0.55) return false;
+  if(tx < _W * 0.45) return false;
   JS.active  = true;
   JS.touchId = touch.identifier;
   jsEl.disc.classList.add('active');
@@ -786,16 +786,16 @@ class Player{
     if(USE_JOYSTICK){
       if(JS.active){
         // Joystick drives velocity directly — ML feel
-        const spd = 3.0;
+        const spd = 2.5;
         this.vx = lerp(this.vx, JS.nx * spd, 0.10);
         this.vy = lerp(this.vy, JS.ny * spd, 0.10);
         // Keep mx/my ahead of player for collision aiming
-        mx = this.x + JS.nx * 40;
-        my = this.y + JS.ny * 40;
+        mx = this.x + JS.nx * 10;
+        my = this.y + JS.ny * 10;
       } else {
         // Friction when joystick released
-        this.vx = lerp(this.vx, 0, 0.08);
-        this.vy = lerp(this.vy, 0, 0.08);
+        this.vx = lerp(this.vx, 0, 0.05);
+        this.vy = lerp(this.vy, 0, 0.05);
       }
     } else {
       // Desktop mouse steering
