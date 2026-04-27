@@ -98,7 +98,7 @@ canvas{
 #joystick-zone{
   position:absolute;
   bottom:calc(var(--safe-bottom) + 12px);
-  left:calc(var(--safe-left) + 12px);
+  right: calc(var(--safe-right) + 12px);
   /* total zone = base diameter + some breathing room */
   width:calc(var(--js-base)*2 + 24px);
   height:calc(var(--js-base)*2 + 24px);
@@ -786,16 +786,16 @@ class Player{
     if(USE_JOYSTICK){
       if(JS.active){
         // Joystick drives velocity directly — ML feel
-        const spd = 5.0;
-        this.vx = lerp(this.vx, JS.nx * spd, 0.20);
-        this.vy = lerp(this.vy, JS.ny * spd, 0.20);
+        const spd = 3.0;
+        this.vx = lerp(this.vx, JS.nx * spd, 0.10);
+        this.vy = lerp(this.vy, JS.ny * spd, 0.10);
         // Keep mx/my ahead of player for collision aiming
         mx = this.x + JS.nx * 40;
         my = this.y + JS.ny * 40;
       } else {
         // Friction when joystick released
-        this.vx = lerp(this.vx, 0, 0.16);
-        this.vy = lerp(this.vy, 0, 0.16);
+        this.vx = lerp(this.vx, 0, 0.08);
+        this.vy = lerp(this.vy, 0, 0.08);
       }
     } else {
       // Desktop mouse steering
